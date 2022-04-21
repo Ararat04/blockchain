@@ -6,9 +6,9 @@ from block import *
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'post':
+    if request.method == 'POST':
         lender = request.form['lender']
         amount = request.form['amount']
         borrower = request.form['borrower']
@@ -17,6 +17,12 @@ def index():
         return redirect(url_for('index'))
 
     return render_template('index.html')
+
+
+@app.route('/checking',  methods=['POST', 'GET'])
+def check():
+    results = check_integrity()
+    return render_template('index.html', results=results)
 
 
 if __name__ == '__main__':

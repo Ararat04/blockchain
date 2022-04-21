@@ -11,14 +11,44 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-6 mx-auto mt-5">
-            {% block content %}
 
-            {% endblock %}
+    <style>
+        background-color: salmon;
+        background-color: #00ff00;
+        background-color: rgba(255, 128, 128, 0.5);
+        background-color: currentColor;
+        background-color: transparent;
+        background-color: inherit;
+        background-color: initial;
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto mt-5">
+                {% block content %}
+
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto mt-5 text-center">
+                <form action="{{ url_for('check') }}" method="GET">
+                    <button type="submit" class="btn btn-success">Check integrity</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mx-auto mt-5">
+                {% block checking %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
 </body>
 </html>

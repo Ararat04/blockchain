@@ -1,6 +1,7 @@
 import json
 import os
 import hashlib
+import datetime as dt
 
 blockchain_dir = os.curdir + '/block/'
 
@@ -21,6 +22,7 @@ def check_integrity():
 
     for file in files[1:]:
         f = open(blockchain_dir + str(file))
+        print(blockchain_dir + str(file))
         h = json.load(f)['prev_hash']
         prev_file = str(file - 1)
         actual_hash = get_hash(prev_file)
@@ -36,14 +38,16 @@ def check_integrity():
 
 def write_block(name, amount, to_whom, prev_hash=''):
     files = get_files()
-    prev_file = files(-1)
-    filename = str(prev_files + 1)
+    prev_file = files[-1]
+    filename = str(prev_file + 1)
     prev_hash = get_hash(str(prev_file))
 
     data = {"name": name,
             "amount": amount,
             "to_whom": to_whom,
-            "prev_hash": prev_hash}
+            "prev_hash": prev_hash,
+            "time": str(dt.datetime.now())
+            }
 
     with open(blockchain_dir + filename, 'w') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
